@@ -55,7 +55,7 @@ import './App.css';
         const markers = [];
         const contents = [];
         const map = new window.google.maps.Map(document.getElementById('map'), {
-            center: {lat: 36.2031513, lng: -86.69282279999999},
+            center: {lat: 36.202971, lng: -86.692699},
             zoom: 12,
             mapTypeId: 'roadmap',
             mapTypeControl: false,
