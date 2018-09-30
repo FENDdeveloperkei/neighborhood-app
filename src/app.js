@@ -25,16 +25,16 @@ class App extends Component {
     };
 
     handleFilter(query) {
-        // set state of query, setting visibility of each marker
+        // set state of query
         this.setState({ query });
         this.state.markers.map(marker => marker.setVisible(true));
 
-        // filter locations based on query, set state of filtered
+        // filter locations based on query
         if (query) {
             const filtered = this.props.locations.filter(location => location.name.toLowerCase().includes(this.state.query.toLowerCase()));
             this.setState({ filtered });
 
-            // hide markers that are not searched for and update its state
+            // hide markers not searched for
             const hideMarkers = this.state.markers.filter(marker => filtered.every(filteredLocation => filteredLocation.name !== marker.title));
             hideMarkers.forEach(marker => marker.setVisible(false));
             this.setState({ hideMarkers });
@@ -50,19 +50,19 @@ class App extends Component {
     }
 
     initMap() {
-        // initialize the whole map
+        // load up full map
         const markers = [];
         const contents = [];
         const map = new window.google.maps.Map(document.getElementById('map'), {
             center: {lat: 36.2031513, lng: -86.69282279999999},
-            zoom: 13,
+            zoom: 12,
             mapTypeId: 'roadmap',
             mapTypeControl: false,
             streetViewControl: true
         });
         const infowindow = new window.google.maps.InfoWindow();
         this.props.locations.filter(location => location.name.toLowerCase().includes(this.state.query.toLowerCase())).forEach(location => {
-            //create content string for each info window
+            //content string for each info window
             const contentString = `
                 <div class="info-content">
                     <h2>${location.name}</h2>
@@ -70,7 +70,7 @@ class App extends Component {
                 <p>Address: <a href="https://maps.google.com/?q=${location.address}">${location.address}</a></p>
                 <p><a href=${location.site}>Check out the ${location.site} on the Web</a></p>
             `;
-            // create a marker for each location
+            // a marker for each location
             const marker = new window.google.maps.Marker({
                 position: location.loc,
                 map: map,
@@ -79,8 +79,7 @@ class App extends Component {
             });
             markers.push(marker);
             contents.push(contentString);
-            // set the info window content to location info and open on marker click
-            marker.addListener('click', function() {
+                marker.addListener('click', function() {
                 infowindow.setContent(contentString);
                 infowindow.open(map, marker);
                 // animate the markers on click
@@ -89,7 +88,7 @@ class App extends Component {
                     marker.setAnimation(null)
                 }, 500);
             });
-            // close info windows when map is clicked
+            // closes info windows when clicked
             map.addListener('click', function() {
                 if (infowindow) {
                     infowindow.close();
@@ -115,7 +114,6 @@ class App extends Component {
     }
 }
 
-// no libraries used, loading script tags the old fashioned way
 function loadScript(url) {
     let index = window.document.getElementsByTagName('script')[0];
     let script = window.document.createElement('script');
@@ -124,7 +122,7 @@ function loadScript(url) {
     script.defer = true;
     index.parentNode.insertBefore(script, index);
     script.onerror = function() {
-        document.write('Error loading Map. Please try again.')
+        document.write('Problems encountered while loading Map. Try again later.')
     };
 }
 
