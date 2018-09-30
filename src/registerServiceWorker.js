@@ -33,7 +33,7 @@ export default function register() {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
       if (isLocalhost) {
-        // This is running on localhost. Lets check if a service worker still exists or not.
+        // This is running on localhost. Check if a service worker exists or not.
         checkValidServiceWorker(swUrl);
 
         // Add some additional logging to localhost, pointing developers to the
@@ -45,7 +45,7 @@ export default function register() {
           );
         });
       } else {
-        // Is not local host. Just register service worker
+        // not local host. Just register service worker
         registerValidSW(swUrl);
       }
     });
@@ -63,14 +63,14 @@ function registerValidSW(swUrl) {
             if (navigator.serviceWorker.controller) {
               // At this point, the old content will have been purged and
               // the fresh content will have been added to the cache.
-              // It's the perfect time to display a "New content is
-              // available; please refresh." message in your web app.
-              console.log('New content is available; please refresh.');
+              // It's the perfect time to display a "New content 
+              // available; please refresh page." message in your web app.
+              console.log('New content available; please refresh page.');
             } else {
-              // At this point, everything has been precached.
+              // Now that everything has been precached.
               // It's the perfect time to display a
-              // "Content is cached for offline use." message.
-              console.log('Content is cached for offline use.');
+              // "Content cached for offline use." message.
+              console.log('Content cached for offline use.');
             }
           }
         };
@@ -82,22 +82,22 @@ function registerValidSW(swUrl) {
 }
 
 function checkValidServiceWorker(swUrl) {
-  // Check if the service worker can be found. If it can't reload the page.
+  // Check if service worker can be found. If not reload page.
   fetch(swUrl)
     .then(response => {
-      // Ensure service worker exists, and that we really are getting a JS file.
+      // Ensure service worker exists
       if (
         response.status === 404 ||
         response.headers.get('content-type').indexOf('javascript') === -1
       ) {
-        // No service worker found. Probably a different app. Reload the page.
+        // No service worker found. We need to reload the page.
         navigator.serviceWorker.ready.then(registration => {
           registration.unregister().then(() => {
             window.location.reload();
           });
         });
       } else {
-        // Service worker found. Proceed as normal.
+        // Service worker found. Please continue.
         registerValidSW(swUrl);
       }
     })
