@@ -2,17 +2,6 @@ import React, { Component } from 'react';
 import Filter from './components/Filter.jsx';
 import './App.css';
 
-class App extends Component {
-    state = {
-        query: '',
-        map: '',
-        markers: [],
-        infowindow: '',
-        contents: [],
-        filtered: [],
-        hideMarkers: []
-    };
-
     static defaultProps = {
         locations: [
             {name: 'Bath & Body Works', loc: {lat: 36.2028105, lng: -86.69238539999998}, address: '448 Opry Mills Dr, Nashville, TN 37214', site: 'http://www.bathandbodyworks.com/'},
@@ -22,6 +11,18 @@ class App extends Component {
             {name: 'Zales Outlet', loc: {lat: 36.20366, lng: -86.69239}, address: '228 Opry Mills Dr, Nashville, TN 37214', site: 'https://www.zalesoutlet.com/'},
             {name: 'Solitaire the Diamond Store', loc: {lat: 36.20365849999999, lng: -86.69482479999999}, address: '158 Opry Mills Dr, Nashville, TN 37214, USA', site: 'http://www.mywatchstock.com/Category/watches/1/2909'}
         ]
+    };
+
+
+    class App extends Component {
+    state = {
+        query: '',
+        map: '',
+        markers: [],
+        infowindow: '',
+        contents: [],
+        filtered: [],
+        hideMarkers: []
     };
 
     handleFilter(query) {
@@ -88,7 +89,6 @@ class App extends Component {
                     marker.setAnimation(null)
                 }, 500);
             });
-            // closes info windows when clicked
             map.addListener('click', function() {
                 if (infowindow) {
                     infowindow.close();
